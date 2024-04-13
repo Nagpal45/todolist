@@ -34,7 +34,7 @@ export default function Navbar() {
   return (
     <div className={styles.navbar}>
       <div className={styles.left}>
-        <p>Todoist</p>
+        <Link href='/'><p>Todoist</p></Link>
       </div>
       {
         user ? (
