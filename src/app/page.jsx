@@ -5,6 +5,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { Timestamp, addDoc, collection, deleteDoc, doc, getDocs, onSnapshot, query, updateDoc, where } from 'firebase/firestore';
 import { useRouter } from 'next/navigation';
 
+
 export default function Todo() {
   const [user, setUser] = useState(null);
   const [todos, setTodos] = useState([]);
@@ -87,58 +88,48 @@ export default function Todo() {
     }
   };
 
-  const handleLogout = async () => {
-    try {
-      await auth.signOut();
-    } catch (error) {
-      console.error('Error signing out:', error.message);
-    }
-  };
 
   if (!user) return null;
 
   return (
     <div>
-      <div>
-        <h1>Welcome, {user.displayName}</h1>
-        <button onClick={handleLogout}>Logout</button>
-        <input
-          type="text"
-          value={newTodo}
-          onChange={(e) => setNewTodo(e.target.value)}
-          placeholder="Add new todo"
-        />
-        <button onClick={addTodo}>Add</button>
-        <ul>
-          {todos?.map((todo) => (
-            <li key={todo.id}>
-              {editTodoId === todo.id ? (
-                <>
-                  <input
-                    type="text"
-                    value={editedTodo}
-                    onChange={(e) => setEditedTodo(e.target.value)}
-                  />
-                  <button onClick={() => editTodo(todo.id, editedTodo)}>
-                    Save
-                  </button>
-                </>
-              ) : (
-                <>
-                  {todo.title}
-                  <button onClick={() => {
-                    setEditTodoId(todo.id);
-                    setEditedTodo(todo.title); 
-                  }}>
-                    Edit
-                  </button>
-                  <button onClick={() => {deleteTodo(todo.id)}}>Delete</button>
-                </>
-              )}
-            </li>
-          ))}
-        </ul>
-      </div>
+      <input
+        type="text"
+        value={newTodo}
+        onChange={(e) => setNewTodo(e.target.value)}
+        placeholder="Add new todo"
+      />
+      <button onClick={addTodo}>Add</button>
+      <ul>
+        {todos?.map((todo) => (
+          <li key={todo.id}>
+            {editTodoId === todo.id ? (
+              <>
+                <input
+                  type="text"
+                  value={editedTodo}
+                  onChange={(e) => setEditedTodo(e.target.value)}
+                />
+                <button onClick={() => editTodo(todo.id, editedTodo)}>
+                  Save
+                </button>
+              </>
+            ) : (
+              <>
+                {todo.title}
+                <button onClick={() => {
+                  setEditTodoId(todo.id);
+                  setEditedTodo(todo.title);
+                }}>
+                  Edit
+                </button>
+                <button onClick={() => { deleteTodo(todo.id) }}>Delete</button>
+              </>
+            )}
+          </li>
+        ))}
+      </ul>
     </div>
+
   );
 }
