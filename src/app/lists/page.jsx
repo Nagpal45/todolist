@@ -1,7 +1,7 @@
 "use client"
 import { auth, firestore } from '@/lib/firebase';
 import { onAuthStateChanged } from 'firebase/auth';
-import { Timestamp, addDoc, collection, onSnapshot, query, where } from 'firebase/firestore';
+import { Timestamp, addDoc, collection, deleteDoc, doc, onSnapshot, query, where } from 'firebase/firestore';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
@@ -67,6 +67,15 @@ export default function Lists() {
           }
       }
     };
+
+    const deleteList = async (listId) => {
+      try {
+        const listDoc = doc(firestore, 'lists', listId);
+        await deleteDoc(listDoc);
+      } catch (error) {
+        console.error('Error deleting todo:', error.message);
+      }
+    };
   
     return (
       <div className={styles.listPage}>
@@ -82,19 +91,21 @@ export default function Lists() {
           />
           <button onClick={handleCreateList} className={styles.addButton}>Create List</button>
           </div>
-          {lists.map(list => (
+          {lists.length > 0 ? (
+            lists.map(list => (
             <div  key={list.id} className={styles.listItem}>
             {list.name}
-            
             <div>
-                
                 <Link  href={`/lists/${list.id}`}><button style={{backgroundColor: 'rgb(32, 168, 252)'}} className={styles.editButton}>
                   Open List
                 </button></Link>
-                <button className={styles.deleteButton} onClick={() => { deleteTodo(todo.id) }}>Delete</button>
+                <button className={styles.deleteButton} onClick={() => { deleteList(list.id) }}>Delete</button>
                 </div>
             </div>
-          ))}
+          ))
+          ):(
+            <p className={styles.nothing}>Create Different lists for different needs</p>
+          )}
         </div>
       </div>
     );

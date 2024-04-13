@@ -20,11 +20,12 @@
     justify-content: flex-start;
     flex-direction: column;
     background: rgba(116, 209, 249, 0.3);
-    min-height: 30vw;
+    min-height: 25vw;
     border-radius: 1vw;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     padding: 2vw;
     margin-bottom: 3vw;
+    padding-bottom: 5vw;
 }
 
 .addInput{
