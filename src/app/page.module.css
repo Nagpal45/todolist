@@ -1,0 +1,90 @@
+.listPage{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.listPage h1{
+    align-self: flex-start;
+    font-size: 3vw;
+    margin-top: 1vw;
+}
+
+.list{
+    margin-top: 2vw;
+    width: 95%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    background: rgba(116, 209, 249, 0.3);
+    min-height: 30vw;
+    border-radius: 1vw;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 2vw;
+    margin-bottom: 3vw;
+}
+
+.addInput{
+    width: 60%;
+    border: none;
+    height: 70%;
+    padding-left: 1vw;
+    border-radius: 0.5vw;
+    font-size: 1vw;
+}
+
+.list input:focus{
+    outline: none;
+}
+
+
+.listItem:first-child{
+    width: 100%;
+    margin-bottom: 1vw;
+}
+
+.listItem{
+    width: 95%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.3vw;
+    height: 5vw;
+    font-weight: 600;
+}
+
+.addButton, .deleteButton, .editButton{
+    background-color: lightgreen;
+    width: 10vw;
+    height: 3vw;
+    border-radius: 0.5vw;
+    font-size: 1vw;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.deleteButton{
+    background-color: rgb(243, 153, 153);
+    width: 7vw;
+    height: 2.5vw;
+    margin-left: 2vw;
+} 
+.editButton{
+    background-color: rgb(251, 251, 184);
+    width: 7vw;
+    height: 2.5vw;
+}
+
+.sepLine{
+    border-bottom: 0.1vw solid rgb(208, 207, 207);
+    width: 95%;
+}
+
+.nothing{
+    margin-top: 10vw;
+    color: gray;
+    font-size: 1.2vw;
+}

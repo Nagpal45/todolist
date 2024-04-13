@@ -9,7 +9,6 @@ import Link from 'next/link';
 
 export default function Navbar() {
   const [user, setUser] = useState(null);
-  console.log(user);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (authUser) => {

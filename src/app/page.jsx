@@ -4,6 +4,7 @@ import { auth, firestore } from '../lib/firebase'
 import { onAuthStateChanged } from 'firebase/auth';
 import { Timestamp, addDoc, collection, deleteDoc, doc, getDocs, onSnapshot, query, updateDoc, where } from 'firebase/firestore';
 import { useRouter } from 'next/navigation';
+import styles from './page.module.css'
 
 
 export default function Todo() {
@@ -92,17 +93,24 @@ export default function Todo() {
   if (!user) return null;
 
   return (
-    <div>
+    <div className={styles.listPage}>
+    <h1>ListName</h1>
+      <div className = {styles.list}>
+      <div className={styles.listItem}>
       <input
         type="text"
         value={newTodo}
         onChange={(e) => setNewTodo(e.target.value)}
         placeholder="Add new todo"
+        className={styles.addInput}
       />
-      <button onClick={addTodo}>Add</button>
-      <ul>
-        {todos?.map((todo) => (
-          <li key={todo.id}>
+      <button className={styles.addButton} onClick={addTodo}>Add</button>
+      </div>
+        {
+          todos.length > 0 ? (
+            todos?.map((todo) => (
+          <>
+          <div key={todo.id} className={styles.listItem}>
             {editTodoId === todo.id ? (
               <>
                 <input
@@ -117,18 +125,26 @@ export default function Todo() {
             ) : (
               <>
                 {todo.title}
+                <div>
                 <button onClick={() => {
                   setEditTodoId(todo.id);
                   setEditedTodo(todo.title);
-                }}>
+                }} className={styles.editButton}>
                   Edit
                 </button>
-                <button onClick={() => { deleteTodo(todo.id) }}>Delete</button>
+                <button className={styles.deleteButton} onClick={() => { deleteTodo(todo.id) }}>Delete</button>
+                </div>
               </>
             )}
-          </li>
-        ))}
-      </ul>
+          </div>
+          <div className={styles.sepLine}></div>
+          </>
+        ))
+          ):(
+            <p className={styles.nothing}>Don&apos;t remember, just add here</p>
+          )
+        }
+      </div>
     </div>
 
   );
